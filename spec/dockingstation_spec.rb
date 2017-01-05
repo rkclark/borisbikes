@@ -20,7 +20,7 @@ describe DockingStation do
       expect(subject).to respond_to(:dock).with(1).argument
     end
     it "allows only one bike to be docked at a time" do
-      expect { subject.dock(bike) }.to raise_error
+      expect { subject.dock(bike) }.to raise_error(RuntimeError, "This docking_station is full!")
     end
     it "can tell a user what bikes are docked" do
       expect(subject.docked_bikes).to include(bike)
