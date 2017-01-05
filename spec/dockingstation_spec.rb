@@ -1,9 +1,9 @@
 require "dockingstation.rb"
 
 describe DockingStation do
-  describe "tests with bikes in docking_station" do
+  bike = Bike.new
+  describe "tests with one bike in the docking_station" do
     it { expect(subject.respond_to?(:release_bike)).to eq true }
-    bike = Bike.new
     before (:each) do
       subject.docked_bikes << bike
     end
@@ -19,9 +19,6 @@ describe DockingStation do
     it "can be passed one bike for docking" do
       expect(subject).to respond_to(:dock).with(1).argument
     end
-    it "allows only one bike to be docked at a time" do
-      expect { subject.dock(bike) }.to raise_error(RuntimeError, "This docking_station is full!")
-    end
     it "can tell a user what bikes are docked" do
       expect(subject.docked_bikes).to include(bike)
     end
@@ -30,6 +27,15 @@ describe DockingStation do
   describe "tests without bikes in docking station" do
     it "doesn't allow a bike to be released if there are no bikes" do
       expect {subject.release_bike}.to raise_error(RuntimeError, "There are no docked bikes!")
+    end
+  end
+
+  describe "tests when docking station at maximum capacity" do
+    before (:each) do
+      20.times {subject.docked_bikes << Bike.new}
+    end
+    it "allows a maximum of 20 bikes to be docked at a time" do
+      expect { subject.dock(bike) }.to raise_error(RuntimeError, "This docking_station is full!")
     end
   end
 end
