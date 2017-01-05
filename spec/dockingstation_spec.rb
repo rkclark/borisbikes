@@ -2,28 +2,28 @@ require "dockingstation.rb"
 
 describe DockingStation do
   describe "tests with bikes in docking_station" do
-    bike = Bike.new
     it { expect(subject.respond_to?(:release_bike)).to eq true }
+    bike = Bike.new
     before (:each) do
-      subject.docked_bikes << Bike.new
+      subject.docked_bikes << bike
     end
-    it "can release a bike with class bike" do
+    it "releases a bike" do
       expect(subject.release_bike()).to be_instance_of(Bike)
     end
-    it "expects the bike to be working" do
+    it "the released bike is working" do
       expect(subject.release_bike.working?).to eq true
     end
     it "#dock" do
       expect(subject.respond_to?(:dock)).to eq true
     end
-    it "can accept one bike for docking" do
+    it "can be passed one bike for docking" do
       expect(subject).to respond_to(:dock).with(1).argument
-      expect(subject.dock(bike)).not_to be_empty
-      expect(subject.docked_bikes).not_to be_empty
+    end
+    it "allows only one bike to be docked at a time" do
       expect { subject.dock(bike) }.to raise_error
     end
     it "can tell a user what bikes are docked" do
-      expect(subject.dock(bike)).to include(bike)
+      expect(subject.docked_bikes).to include(bike)
     end
   end
 
