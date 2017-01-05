@@ -31,19 +31,25 @@ describe DockingStation do
   end
 
   describe "tests for docking station capacity" do
-    it "allows a bike to be docked if the current number of bikes one less than default capacity" do
-      ((DockingStation::DEFAULT_CAPACITY) -1).times {subject.docked_bikes << Bike.new}
+    it "allows a bike to be docked if the current number of bikes is 19" do
+      19.times {subject.docked_bikes << Bike.new}
       expect { subject.dock(bike) }.not_to raise_error
       last_bike = subject.docked_bikes[-1]
       expect(subject.release_bike).to eq last_bike
     end
-    it "does not allow more bikes than the default capacity to be docked" do
-      DockingStation::DEFAULT_CAPACITY.times {subject.docked_bikes << Bike.new}
+    it "allows a maximum of 20 bikes to be docked at a time" do
+      20.times {subject.docked_bikes << Bike.new}
       expect { subject.dock(bike) }.to raise_error(RuntimeError, "This docking_station is full!")
     end
     it "releases the last docked bike" do
         subject.dock(bike)
         expect(subject.release_bike).to eq bike
+    end
+  end
+
+  describe "docking station initialization tests" do
+    it "takes an argument when DockingStation.new is called" do
+        expect {DockingStation.new(80) }.not_to raise_error
     end
   end
 end
