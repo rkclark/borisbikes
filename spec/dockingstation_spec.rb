@@ -30,11 +30,13 @@ describe DockingStation do
     end
   end
 
-  describe "tests when docking station at maximum capacity" do
-    before (:each) do
-      20.times {subject.docked_bikes << Bike.new}
+  describe "tests for docking station capacity" do
+    it "allows a bike to be docked if the current number of bikes is 19" do
+      19.times {subject.docked_bikes << Bike.new}
+      expect { subject.dock(bike) }.not_to raise_error
     end
     it "allows a maximum of 20 bikes to be docked at a time" do
+      20.times {subject.docked_bikes << Bike.new}
       expect { subject.dock(bike) }.to raise_error(RuntimeError, "This docking_station is full!")
     end
   end
