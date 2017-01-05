@@ -5,7 +5,6 @@ describe DockingStation do
   it { expect(subject.respond_to?(:release_bike)).to eq true }
   it "can release a bike with class bike" do
     expect(subject.release_bike()).to be_instance_of(Bike)
-      expect {subject.release_bike}.to raise_error
   end
   it "expects the bike to be working" do
     expect(subject.release_bike.working?).to eq true
@@ -21,5 +20,8 @@ describe DockingStation do
   it "can tell a user what bikes are docked" do
     expect(subject.dock(bike)).to include(bike)
   end
-
+  it "doesn't allow a bike to be released if there are no bikes" do
+    expect {subject.release_bike}.to raise_error
+  end
+  
 end
