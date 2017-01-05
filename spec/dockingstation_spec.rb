@@ -11,4 +11,7 @@ describe DockingStation do
   it "#dock" do
     expect(subject.respond_to?(:dock)).to eq true
   end
+  it "can accept one bike for docking" do
+    expect(subject).to respond_to(:dock).with(1).argument
+  end
 end
