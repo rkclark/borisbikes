@@ -39,5 +39,9 @@ describe DockingStation do
       20.times {subject.docked_bikes << Bike.new}
       expect { subject.dock(bike) }.to raise_error(RuntimeError, "This docking_station is full!")
     end
+    it "releases the last docked bike" do
+        subject.dock(bike)
+        expect(subject.release_bike).to eq bike
+    end
   end
 end

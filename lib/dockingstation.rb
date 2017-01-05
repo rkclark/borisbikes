@@ -12,7 +12,7 @@ class DockingStation
   end
 
   def dock(bike)
-    raise "This docking_station is full!" if @docked_bikes.length > 0
+    raise "This docking_station is full!" if @docked_bikes.length >= 20
     @docked_bikes << bike
   end
 
