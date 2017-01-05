@@ -20,6 +20,7 @@ describe DockingStation do
       expect(subject).to respond_to(:dock).with(1).argument
       expect(subject.dock(bike)).not_to be_empty
       expect(subject.docked_bikes).not_to be_empty
+      expect { subject.dock(bike) }.to raise_error
     end
     it "can tell a user what bikes are docked" do
       expect(subject.dock(bike)).to include(bike)
