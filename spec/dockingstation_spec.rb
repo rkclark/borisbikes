@@ -1,6 +1,7 @@
 require "dockingstation.rb"
 
 describe DockingStation do
+  bike = Bike.new
   it { expect(subject.respond_to?(:release_bike)).to eq true }
   it "can release a bike with class bike" do
     expect(subject.release_bike()).to be_instance_of(Bike)
@@ -13,8 +14,11 @@ describe DockingStation do
   end
   it "can accept one bike for docking" do
     expect(subject).to respond_to(:dock).with(1).argument
-    expect(subject.dock(Bike.new)).not_to be_empty
+    expect(subject.dock(bike)).not_to be_empty
     expect(subject.docked_bikes).not_to be_empty
+  end
+  it "can tell a user what bikes are docked" do
+    expect(subject.docked_bikes).to include(bike)
   end
 
 end
