@@ -13,7 +13,8 @@ describe DockingStation do
   end
   it "can accept one bike for docking" do
     expect(subject).to respond_to(:dock).with(1).argument
+    expect(subject.dock(Bike.new)).not_to be_empty
     expect(subject.docked_bikes).not_to be_empty
   end
-  
+
 end
