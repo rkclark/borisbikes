@@ -5,6 +5,7 @@ describe DockingStation do
   it { expect(subject.respond_to?(:release_bike)).to eq true }
   it "can release a bike with class bike" do
     expect(subject.release_bike()).to be_instance_of(Bike)
+      expect {subject.release_bike}.to raise_error
   end
   it "expects the bike to be working" do
     expect(subject.release_bike.working?).to eq true
