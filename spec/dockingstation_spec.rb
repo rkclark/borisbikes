@@ -51,5 +51,10 @@ describe DockingStation do
     it "takes an argument when DockingStation.new is called" do
         expect {DockingStation.new(80) }.not_to raise_error
     end
+    it "sets capacity as per the parameter passed to it" do
+      test_capacity = 50
+      docking_station = DockingStation.new(test_capacity) 
+      expect(docking_station.capacity).to eq test_capacity
+    end
   end
 end
