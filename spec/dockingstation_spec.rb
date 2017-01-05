@@ -6,4 +6,7 @@ describe DockingStation do
   it "can release a bike with class bike" do
     expect(docking_instance.release_bike()).to be_instance_of(Bike)
   end
+  it "expects the bike to be working" do
+    expect(docking_instance.release_bike.working?).to eq true
+  end
 end
