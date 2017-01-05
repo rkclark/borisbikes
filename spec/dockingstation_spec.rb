@@ -18,7 +18,7 @@ describe DockingStation do
     expect(subject.docked_bikes).not_to be_empty
   end
   it "can tell a user what bikes are docked" do
-    expect(subject.docked_bikes).to include(bike)
+    expect(subject.dock(bike)).to include(bike)
   end
 
 end
