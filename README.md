@@ -7,6 +7,7 @@ An introductory project to cover the basics of Test Driven Development and Objec
 
 - Clone this repo
 - In the project root, run `bundle install`
+- To run the tests, run `rspec`
 - To try the app, run `irb` then follow the usage example below
 
 ### Usage
